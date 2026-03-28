@@ -32,26 +32,34 @@ cp app/models/module_license.rb $LIS_ROOT/app/models/
 
 ### Controllers
 
-The IMS controllers live in `app/controllers/api/` and are namespaced as `Api::Ims::*`.
-Copy them to the same location in the LIS:
+The IMS controllers live in `app/controllers/api/ims/` and are namespaced as
+`Api::Ims::*` (Zeitwerk-compatible path).
+
+First create the destination directory in the LIS:
 
 ```bash
-cp app/controllers/api/attachments_controller.rb   $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/blocks_controller.rb        $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/cases_controller.rb         $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/dashboard_controller.rb     $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/notifications_controller.rb $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/prep_requests_controller.rb $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/queues_controller.rb        $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/report_pdf_controller.rb    $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/settings_controller.rb      $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/shares_controller.rb        $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/slides_controller.rb        $LIS_ROOT/app/controllers/api/
-cp app/controllers/api/sub_reports_controller.rb   $LIS_ROOT/app/controllers/api/
+mkdir -p $LIS_ROOT/app/controllers/api/ims
 ```
 
-> **Note:** `health_controller.rb` is already present in the LIS — skip it or merge
-> the routes manually.
+Then copy all controllers:
+
+```bash
+cp app/controllers/api/ims/attachments_controller.rb   $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/blocks_controller.rb        $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/cases_controller.rb         $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/dashboard_controller.rb     $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/notifications_controller.rb $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/prep_requests_controller.rb $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/queues_controller.rb        $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/report_pdf_controller.rb    $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/settings_controller.rb      $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/shares_controller.rb        $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/slides_controller.rb        $LIS_ROOT/app/controllers/api/ims/
+cp app/controllers/api/ims/sub_reports_controller.rb   $LIS_ROOT/app/controllers/api/ims/
+```
+
+> **Note:** `health_controller.rb` is included for completeness. If the LIS already
+> has an `Api::Ims::HealthController`, skip it or merge the route manually.
 
 ### Front-end catch-all controller (optional)
 
