@@ -1,0 +1,21 @@
+kind = "api"
+  previewPath = "/ims"
+  title = "Rails IMS"
+  version = "1.0.0"
+
+  [[services]]
+  localPort = 3100
+  name = "Rails IMS"
+  paths = ["/ims", "/rails/api"]
+
+  [services.development]
+  run = "bash artifacts/rails-ims/bin/start"
+
+  [services.development.env]
+  PORT = "3100"
+  RAILS_ENV = "development"
+  RAILS_LOG_TO_STDOUT = "1"
+
+  [services.production.health.startup]
+  path = "/api/healthz"
+  
