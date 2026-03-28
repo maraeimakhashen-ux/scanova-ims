@@ -317,11 +317,18 @@ end
 
 All IMS database tables use the `ims_` prefix — no collision with standard LIS
 tables. All IMS models are named `Ims*` (e.g. `ImsCase`, `ImsSlide`). All IMS
-controllers are in the `Api::Ims` namespace (`module Api; module Ims; class ...`).
-All IMS routes are nested under `namespace :api do; namespace :ims do`.
+controllers are in the `Api::Ims` namespace (`module Api; module Ims; class ...`)
+and live in `app/controllers/api/ims/` (Zeitwerk-compatible layout). All IMS
+routes are nested under `namespace :api do; namespace :ims do`.
 
-The single shared model `ModuleLicense` uses no prefix because it is intentionally
-global to the combined LIS+IMS system.
+The single shared model `ModuleLicense` (singular) uses no prefix because it is
+intentionally global to the combined LIS+IMS system. The helper method is
+`ModuleLicense.licensed?` (not `ModuleLicenses`).
+
+> **Important — use migrations, not schema.rb**: The IMS `db/schema.rb` reflects
+> the shared development database and includes non-`ims_`-prefixed legacy tables.
+> Do **not** copy `schema.rb` to the LIS. Always use `rails db:migrate` after
+> copying the IMS migration files.
 
 ---
 
