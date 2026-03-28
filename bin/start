@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "Setting up Rails IMS..."
+bundle exec rails db:create db:migrate 2>&1 || bundle exec rails db:migrate 2>&1 || true
+
+echo "Starting Rails server..."
+exec bundle exec rails server -b 0.0.0.0
