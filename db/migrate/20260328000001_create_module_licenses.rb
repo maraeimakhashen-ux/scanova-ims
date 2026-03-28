@@ -1,4 +1,6 @@
 class CreateModuleLicenses < ActiveRecord::Migration[8.1]
+  LICENSED_MODULES = %w[lis order_collect ims share billing quality_qc template_forms ai].freeze
+
   def change
     create_table :module_licenses do |t|
       t.string  :tenant_id,    null: false
@@ -12,8 +14,7 @@ class CreateModuleLicenses < ActiveRecord::Migration[8.1]
 
     reversible do |dir|
       dir.up do
-        MODULES = %w[lis order_collect ims share billing quality_qc template_forms ai].freeze
-        MODULES.each do |mod|
+        LICENSED_MODULES.each do |mod|
           execute <<~SQL
             INSERT INTO module_licenses (tenant_id, module_name, enabled, created_at, updated_at)
             VALUES ('default', '#{mod}', false, NOW(), NOW())
